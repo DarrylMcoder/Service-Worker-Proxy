@@ -24,7 +24,7 @@ async function handleRequest(request) {
 }
 
 function editRequest(request) {
-  const proxy = "./";
+  const proxy = "./?url=";
   if(request.mode === 'navigate') {
     const newRequest = new Request(proxy+getRealUrl(request.url), {
       method: request.method,
