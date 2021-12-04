@@ -24,7 +24,7 @@ async function handleRequest(request) {
 }
 
 function editRequest(request) {
-  const proxy = "./?url=";
+  const proxy = "https://service-worker-pro.herokuapp.com/?url=";
   if(request.mode === 'navigate') {
     const newRequest = new Request(proxy+getRealUrl(request.url), {
       method: request.method,
