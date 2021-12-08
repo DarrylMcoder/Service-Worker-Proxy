@@ -50,7 +50,7 @@ async function editRequest(request) {
 
 async function editResponse(response) {
   var data = decrypt(response.body,"WERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890Q");
-  return new Response("Response:" + data,{
+  return new Response("Response1:" + data,{
     status: response.status,
     statusText: response.statusText,
     headers: response.headers
