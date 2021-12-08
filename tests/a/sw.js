@@ -19,8 +19,12 @@ self.addEventListener('fetch', function(event) {
 });
     
 async function handleRequest(request) {
-  const response = await fetch(await editRequest(request));
+  try {
+    var response = await fetch(await editRequest(request));
   return await editResponse(response);
+  } catch(e) {
+    return new Response("Error: " + e);
+  }
 }
 
 async function editRequest(request) {
