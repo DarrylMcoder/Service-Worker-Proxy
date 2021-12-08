@@ -32,7 +32,7 @@ async function editRequest(request) {
   var url = await getRealUrl(request.url);
   var proxyUrl = proxy + url;
   if(true) {
-    const newRequest = new Request(proxyUrl, {
+    var newRequest = new Request(proxyUrl, {
       method: request.method,
       headers: request.headers,
       body: request.body,
@@ -50,7 +50,7 @@ async function editRequest(request) {
 
 async function editResponse(response) {
   var data = decrypt(response.body,"WERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890Q");
-  return new Response("Response1:" + data,{
+  return new Response("Response2:" + data,{
     status: response.status,
     statusText: response.statusText,
     headers: response.headers
