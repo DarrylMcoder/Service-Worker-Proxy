@@ -23,7 +23,7 @@ async function handleRequest(request) {
     var response = await fetch(await editRequest(request));
   return await editResponse(response);
   } catch(e) {
-    return new Response("Error: " + e);
+    return new Response("Error1: " + e);
   }
 }
 
