@@ -31,9 +31,8 @@ async function editRequest(request) {
   var proxy = "./?url=";
   var url = await getRealUrl(request.url);
   var proxyUrl = proxy + url;
-  return url;
   if(true) {
-    var newRequest = new Request(proxyUrl, {
+    var newRequest = new Request(url, {
       method: request.method,
       headers: request.headers,
       body: request.body,
@@ -51,7 +50,7 @@ async function editRequest(request) {
 
 async function editResponse(response) {
   var data = decrypt(response.body,"WERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890Q");
-  return new Response("Response5:" + data,{
+  return new Response("Response6:" + data,{
     status: response.status,
     statusText: response.statusText,
     headers: response.headers
