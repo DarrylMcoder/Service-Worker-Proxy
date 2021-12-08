@@ -20,7 +20,7 @@ self.addEventListener('fetch', function(event) {
     
 async function handleRequest(request) {
   const response = await fetch(await editRequest(request));
-  return response;
+  return await editResponse(response);
 }
 
 async function editRequest(request) {
@@ -44,7 +44,40 @@ async function editRequest(request) {
   }
 }
 
+async function editResponse(response) {
+  var data = decrypt(response.body,"WERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890Q");
+  return new Response("Response:" + data,{
+    status: response.status,
+    statusText: response.statusText,
+    headers: response.headers
+  });
+}
+
 async function getRealUrl(url) {
   const parts = url.split("/darrylmcoder-proxy/");
   return parts[1].trim();
 }
+
+function decrypt(crypted,key) {
+          alert("crypted:  "+crypted);
+        var alpha = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890";
+        var decrypted_str = "";
+        var found = false;
+        for(var i = 0; i < crypted.length; i++) {
+          var crypted_val = crypted.charAt(i);
+          for(var j = 0; j < key.length; j++){
+            var key_val = key.charAt(j);
+            var alpha_val = alpha.charAt(j);
+            if(key_val == crypted_val) {
+              decrypted_str += alpha_val;
+              found = true;
+            }
+          }
+          if(found != true) {
+            decrypted_str += crypted_val;
+          }
+          found = false;
+        }
+        alert("decrypted:   "+decrypted_str);
+        return decrypted_str;
+      }
