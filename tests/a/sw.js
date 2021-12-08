@@ -20,7 +20,7 @@ self.addEventListener('fetch', function(event) {
     
 async function handleRequest(request) {
   try {
-    return new Response(await editRequest(request));
+    return new Response(new Url(await editRequest(request)).href);
     var response = await fetch(await editRequest(request));
   return await editResponse(response);
   } catch(e) {
