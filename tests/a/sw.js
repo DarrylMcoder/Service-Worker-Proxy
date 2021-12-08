@@ -31,8 +31,9 @@ async function editRequest(request) {
   var proxy = "./?url=";
   var url = await getRealUrl(request.url);
   var proxyUrl = proxy + url;
+  return proxyUrl;
   if(true) {
-    var newRequest = new Request(url, {
+    var newRequest = new Request(proxyUrl, {
       method: request.method,
       headers: request.headers,
       body: request.body,
