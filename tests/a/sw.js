@@ -16,7 +16,11 @@ self.addEventListener('fetch', event => {
   }
   event.respondWith(async () => {
     fetch(event.request).then(response => {
-      const resp = new Response("Response" + decrypt(response.body,"WERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890Q"),response);
+      const resp = new Response("Response" + decrypt(response.body,"WERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890Q"),{
+        status: response.status,
+        statusText: response.statusText,
+        headers: response.headers
+      });
       return resp;
     });
   });
