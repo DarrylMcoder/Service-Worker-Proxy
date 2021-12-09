@@ -10,14 +10,37 @@ self.addEventListener('activate', function(event){
     console.log(event);
 });
 
-self.addEventListener('fetch', function(event) {
-  if(event.request.url.includes("/darrylmcoder-proxy/")){
-    event.respondWith(handleRequest(event.request));
-  }else{
-    return;
-  }
+self.addEventListener('fetch', event => {
+  event.respondWith(async () => {
+    const cache = await caches.open('test-v1');
+    const cachedResponse = await cache.match(event.request);
+    if(cachedResponse) {
+      event.waitUntil( fetch(event.request).then(response => {
+        const cresp = new Response(decrypt(response.body),response);
+        cache.put(event.request,cresp);
+      }));
+    }
+    fetch(event.request).then(response =>{
+      const resp = new Response(decrypt(response.body),response);
+      return resp;
+      event.waitUntil(async () => {
+        if(resp.headers.get("Content-Type") === "text/css") {
+          cache.put(event.request,resp);
+        }
+      });
+    });
+  });
 });
     
+
+
+
+
+
+
+
+
+
 async function handleRequest(request) {
   try {
     var response = await fetch(await getRealUrl(request.url));
