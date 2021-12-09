@@ -15,8 +15,8 @@ self.addEventListener('fetch', event => {
     return;
   }
   event.respondWith(async () => {
-    fetch(event.request).then(response =>{
-      const resp = new Response("Response" + decrypt(response.body),response);
+    fetch(event.request).then(response => {
+      const resp = new Response("Response" + decrypt(response.body,"WERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890Q"),response);
       return resp;
     });
   });
