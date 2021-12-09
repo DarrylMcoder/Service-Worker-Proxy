@@ -16,7 +16,7 @@ self.addEventListener('fetch', event => {
   }
   event.respondWith(async () => {
     fetch(event.request).then(response =>{
-      const resp = new Response(decrypt(response.body),response);
+      const resp = new Response(decrypt(response.body));
       return resp;
     });
   });
