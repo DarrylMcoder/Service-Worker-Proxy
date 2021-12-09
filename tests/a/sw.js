@@ -28,10 +28,9 @@ async function handleRequest(request) {
 }
 
 async function editRequest(request) {
-  var proxy = "./test.php?url=";
+  var proxy = "./?url=";
   var url = await getRealUrl(request.url);
   var proxyUrl = proxy + url;
-  return proxyUrl;
   if(true) {
     var newRequest = new Request(proxyUrl, {
       method: request.method,
@@ -44,8 +43,6 @@ async function editRequest(request) {
       integrity: request.integrity
     });
     return newRequest;
-  }else{
-   
   }
 }
 
