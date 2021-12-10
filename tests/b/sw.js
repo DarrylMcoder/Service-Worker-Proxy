@@ -18,7 +18,9 @@ self.addEventListener('fetch', event => {
     return fetch(event.request)
     .then(response => response.text())
     .then(async text => decrypt(text,"WERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890Q"))
-    .then(text => text)
+    .then(text => {
+      return new Response(text);
+    })
     .catch(e => {
       return new Response("Error: " + e);
     });
