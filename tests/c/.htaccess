@@ -1,8 +1,0 @@
-<IfModule mod_rewrite.c>
-
-   RewriteEngine On
-
-   ReWriteCond %{REQUEST_URI} darrylmcoder-proxy/ 
-   RewriteRule ^darrylmcoder-proxy/(.*)$ ./?url=$1 [L,QSA]
-
-</IfModule>
