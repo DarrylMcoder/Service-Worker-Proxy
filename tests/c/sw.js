@@ -15,14 +15,14 @@ self.addEventListener('fetch', event => {
     return;
   }
   event.respondWith(async function() {
-    return fetch(event.request);
-    /*.then(response => response.text())
+    return fetch(event.request)
+    .then(response => response.text())
     .then(text => {
       return new Response("Response: " + text);
     })
     .catch(e => {
       return new Response("Error: " + e);
-    });*/
+    });
   }());
 });
     
