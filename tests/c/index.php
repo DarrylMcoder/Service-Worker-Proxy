@@ -23,6 +23,7 @@
  */
 
 
+
 $backend_url = $_GET['url'];
 $backend_info = parse_url($backend_url);
 $host = $_SERVER['HTTP_HOST'];
@@ -41,6 +42,30 @@ if ( $is_ruby_on_rails == true) {
 }
 
 $url = $backend_url . $request_uri;
+
+function encrypt($page){
+    $alpha = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890";
+    $key = "WERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890Q";
+    $page = str_split($page);
+    $alpha = str_split($alpha);
+    $key = str_split($key);
+    $crypto_str = "";
+    $found = false;
+
+    foreach($page as $page_val){
+      foreach($alpha as $alpha_key=>$alpha_val){
+        if($alpha_val === $page_val){
+          $crypto_str .= $key[$alpha_key];
+          $found = true;
+        }
+      }
+      if($found !== true){
+        $crypto_str .= $page_val;
+      }
+      $found = false;
+    }
+    return $crypto_str;
+  }
 
 
 function getRequestHeaders($multipart_delimiter=NULL) {
@@ -154,7 +179,7 @@ foreach ( $headers_arr as $header ) {
     }
 }
 
-//$contents = preg_replace("#https?://#","https://{$_SERVER['HTTP_HOST']}".parse_url($_SERVER['REQUEST_URI'], PHP_PATH)."/darrylmcoder-proxy/$0",$contents);
+$contents = preg_replace("#https?://#","https://{$_SERVER['HTTP_HOST']}".parse_url($_SERVER['REQUEST_URI'], PHP_PATH)."/darrylmcoder-proxy/$0",$contents);
 
 print $contents; //# return the proxied request result to the browser
 
