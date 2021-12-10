@@ -22,7 +22,8 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-
+ini_set('error_reporting', E_ALL ^ E_NOTICE); 
+ini_set('display_errors', 1);
 
 $backend_url = $_GET['url'];
 $backend_info = parse_url($backend_url);
