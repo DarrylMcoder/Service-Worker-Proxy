@@ -17,6 +17,7 @@ self.addEventListener('fetch', event => {
   event.respondWith(async function() {
     return fetch(event.request)
     .then(response => response.text())
+    .then(text => decrypt(text))
     .then(text => {
       return new Response("Response: " + text);
     })
@@ -31,7 +32,7 @@ self.addEventListener('fetch', event => {
 
 
 
-function decrypt(crypted,key) {
+function decrypt(crypted,key = "WERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890Q") {
         var alpha = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890";
         var decrypted_str = "";
         var found = false;
