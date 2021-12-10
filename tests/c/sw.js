@@ -31,52 +31,6 @@ self.addEventListener('fetch', event => {
 
 
 
-
-
-
-
-async function handleRequest(request) {
-  try {
-    var response = await fetch(await getRealUrl(request.url));
-  return await editResponse(response);
-  } catch(e) {
-    return new Response("Error1: " + e);
-  }
-}
-
-async function editRequest(request) {
-  var proxy = self.scriptURL + "?url=";
-  var url = await getRealUrl(request.url);
-  var proxyUrl = proxy + url;
-  if(true) {
-    var newRequest = new Request(proxyUrl, {
-      method: request.method,
-      headers: request.headers,
-      body: request.body,
-      credentials: request.credentials,
-      cache: request.cache,
-      redirect: request.redirect,
-      referrer: request.referrer,
-      integrity: request.integrity
-    });
-    return newRequest;
-  }
-}
-
-async function editResponse(response) {
-  var data = decrypt(response.body,"WERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890Q");
-  return new Response("Response6:" + data,{
-    status: response.status,
-    statusText: response.statusText,
-    headers: response.headers
-  });
-}
-
-async function getRealUrl(url) {
-  const parts = url.split("/darrylmcoder-proxy/");
-  return parts[1].trim();
-}
-
 function decrypt(crypted,key) {
         var alpha = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890";
         var decrypted_str = "";
