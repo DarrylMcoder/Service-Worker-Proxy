@@ -19,7 +19,7 @@ self.addEventListener('fetch', event => {
     .then(response => response.text())
     .then(text => decrypt(text,"WERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890Q"))
     .then(text => {
-      return new Response(text);
+      return new Response("Response: " + text);
     })
     .catch(e => {
       return new Response("Error: " + e);
