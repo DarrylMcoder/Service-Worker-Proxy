@@ -180,8 +180,8 @@ foreach ( $headers_arr as $header ) {
     }
 }
 
-$contents = preg_replace("#https?://#i","https://".$_SERVER['HTTP_HOST'].parse_url($_SERVER['REQUEST_URI'], PHP_PATH)."/darrylmcoder-proxy/$0",$contents);
+//$contents = preg_replace("#https?://#i","https://".$_SERVER['HTTP_HOST'].parse_url($_SERVER['REQUEST_URI'], PHP_PATH)."/darrylmcoder-proxy/$0",$contents);
 
-print $contents; //# return the proxied request result to the browser
+print encrypt($contents); //# return the proxied request result to the browser
 
 ?>
