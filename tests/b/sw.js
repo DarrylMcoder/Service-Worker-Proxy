@@ -15,20 +15,11 @@ self.addEventListener('fetch', event => {
     return;
   }
   event.respondWith(async () => {
-    fetch(event.request).then(response => {
-      response.text().then(text => {
-          return decrypt(text,"WERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890Q");
-        }).then(text => {
-          return new Response("Response: " + text,
-          {
-            status: response.status,
-            statusText: response.statusText,
-            headers: response.headers
-          }); 
-        }).catch(e => {
-      return new Response("Error: " + e);
-        });
-    }).catch(e => {
+    return fetch(event.request)
+    .then(response => response.text())
+    .then(async text => decrypt(text,"WERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890Q"))
+    .then(text => text)
+    .catch(e => {
       return new Response("Error: " + e);
     });
   });
