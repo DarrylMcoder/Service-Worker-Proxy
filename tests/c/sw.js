@@ -14,7 +14,7 @@ self.addEventListener('fetch', event => {
   if(!event.request.url.includes("darrylmcoder-proxy/")) {
     return;
   }
-  event.respondWith(async () => {
+  event.respondWith(async function() {
     return fetch(event.request);
     /*.then(response => response.text())
     .then(text => {
