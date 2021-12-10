@@ -20,7 +20,12 @@ self.addEventListener('fetch', event => {
       return response.text()
       .then(text => decrypt(text))
       .then(text => {
-        return new Response("Response: " + text, response);
+        return new Response("Response: " + text, 
+        {
+          status: response.status,
+          statusText: response.statusText,
+          headers: response.headers
+        });
       });
     })
     .catch(e => {
