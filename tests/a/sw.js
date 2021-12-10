@@ -16,8 +16,9 @@ self.addEventListener('fetch', event => {
   }
   event.respondWith(async () => {
     fetch(event.request).then(response => {
+      return response;
       
-            const resp = new Response("Response: " + decrypt(await response.text(),"WERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890Q"),{
+      const resp = new Response("Response: " + decrypt(await response.text(),"WERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890Q"),{
           status: response.status,
           statusText: response.statusText,
           headers: response.headers
