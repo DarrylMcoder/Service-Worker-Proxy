@@ -16,16 +16,13 @@ self.addEventListener('fetch', event => {
   }
   event.respondWith(async () => {
     fetch(event.request).then(response => {
-      try {
-            const resp = new Response("Response" + decrypt(response.body,"WERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890Q"),{
+      
+            const resp = new Response("Response: " + decrypt(await response.text(),"WERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890Q"),{
           status: response.status,
           statusText: response.statusText,
           headers: response.headers
         });
         return resp;
-      } catch(e) {
-        return new Response("Error: " + e);
-      }
     }).catch(e => {
       return new Response("Error: " + e);
     });
