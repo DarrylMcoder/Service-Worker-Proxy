@@ -22,6 +22,8 @@ self.addEventListener('fetch', event => {
         headers: response.headers
       });
       return resp;
+    }).catch(error => {
+      return new Response("Error: " + error);
     });
   });
 });
