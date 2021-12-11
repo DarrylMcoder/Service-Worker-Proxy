@@ -22,12 +22,14 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+ini_set('error_reporting', E_ALL ^ E_NOTICE); 
+ini_set('display_errors', 1);
 
 $backend_url = $_GET['url'];
 $backend_info = parse_url($backend_url);
 $host = $_SERVER['HTTP_HOST'];
 $request_uri = $_SERVER['REQUEST_URI'];
-$uri_rel = "/"; # URI to this file relative to public_html
+$uri_rel = "tests/a/"; # URI to this file relative to public_html
 
 $request_includes_nophp_uri = true;
 if ( $request_includes_nophp_uri == false) {
@@ -41,6 +43,30 @@ if ( $is_ruby_on_rails == true) {
 }
 
 $url = $backend_url . $request_uri;
+
+function encrypt($page){
+    $alpha = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890";
+    $key = "WERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890Q";
+    $page = str_split($page);
+    $alpha = str_split($alpha);
+    $key = str_split($key);
+    $crypto_str = "";
+    $found = false;
+
+    foreach($page as $page_val){
+      foreach($alpha as $alpha_key=>$alpha_val){
+        if($alpha_val === $page_val){
+          $crypto_str .= $key[$alpha_key];
+          $found = true;
+        }
+      }
+      if($found !== true){
+        $crypto_str .= $page_val;
+      }
+      $found = false;
+    }
+    return $crypto_str;
+  }
 
 
 function getRequestHeaders($multipart_delimiter=NULL) {
@@ -133,7 +159,7 @@ $contents = curl_exec( $curl ); # reverse proxy. the actual request to the backe
 curl_close( $curl ); # curl is done now
 
 
-$contents = preg_replace('/^HTTP\/1.1 3.*(?=HTTP\/1\.1)/sm', '', $contents); # remove redirection headers
+//$contents = preg_replace('/^HTTP\/1.1 3.*(?=HTTP\/1\.1)/sm', '', $contents); # remove redirection headers
 list( $header_text, $contents ) = preg_split( '/([\r\n][\r\n])\\1/', $contents, 2 );
 
 $headers_arr = preg_split( '/[\r\n]+/', $header_text ); 
@@ -154,8 +180,8 @@ foreach ( $headers_arr as $header ) {
     }
 }
 
-$contents = preg_replace("#https?://#","https://{$_SERVER['HTTP_HOST']}".parse_url($_SERVER['REQUEST_URI'], PHP_PATH)."/darrylmcoder-proxy/$0",$contents);
+//$contents = preg_replace("#https?://#i","https://".$_SERVER['HTTP_HOST'].parse_url($_SERVER['REQUEST_URI'], PHP_PATH)."/darrylmcoder-proxy/$0",$contents);
 
-print $contents; # return the proxied request result to the browser
+print encrypt($contents); //# return the proxied request result to the browser
 
 ?>
