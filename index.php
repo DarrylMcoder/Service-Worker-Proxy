@@ -29,7 +29,7 @@ $backend_url = $_GET['url'];
 $backend_info = parse_url($backend_url);
 $host = $_SERVER['HTTP_HOST'];
 $request_uri = $_SERVER['REQUEST_URI'];
-$uri_rel = "tests/a/"; # URI to this file relative to public_html
+$uri_rel = "/"; # URI to this file relative to public_html
 
 $request_includes_nophp_uri = true;
 if ( $request_includes_nophp_uri == false) {
@@ -42,7 +42,7 @@ if ( $is_ruby_on_rails == true) {
     $request_uri = str_replace( "$uri_rel/assets", "/assets", $request_uri );
 }
 
-$url = $backend_url . $request_uri;
+$url = $backend_url;// . $request_uri;
 
 function encrypt($page){
     $alpha = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890";
