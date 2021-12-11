@@ -26,6 +26,8 @@ self.addEventListener('fetch', event => {
           statusText: response.statusText,
           headers: response.headers
         });
+      }).catch(e => {
+        return new Response("Error: " + e);
       });
     })
     .catch(e => {
