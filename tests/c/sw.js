@@ -22,7 +22,7 @@ self.addEventListener('fetch', event => {
       .then(text => {
         return new Response("Response: " + text, 
         {
-          status: (response.status >= 200 && <= 599) ? response.status : 200,
+          status: 200,
           statusText: response.statusText,
           headers: response.headers
         });
