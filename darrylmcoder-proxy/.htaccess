@@ -1,0 +1,7 @@
+<IfModule mod_rewrite.c>
+
+   RewriteEngine On
+   
+   RewriteRule ^(.*)$ ./main.php?url=$1 [L,QSA]
+
+</IfModule>
