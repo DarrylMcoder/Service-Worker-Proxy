@@ -50,7 +50,7 @@ if ( $is_ruby_on_rails == true) {
 
 $splits = explode("darrylmcoder-proxy/",$_SERVER['REQUEST_URI']);
 
-$url = $splits[2];
+$url = $splits[1];
 
 function encrypt($page){
     $alpha = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890";
