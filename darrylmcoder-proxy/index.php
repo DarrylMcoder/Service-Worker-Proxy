@@ -32,7 +32,7 @@ $request_uri = $_SERVER['REQUEST_URI'];
 $uri_rel = "/"; # URI to this file relative to public_html
 
 
-/*
+
 $request_includes_nophp_uri = true;
 if ( $request_includes_nophp_uri == false) {
     $request_uri = str_replace( $uri_rel, "/", $request_uri );
@@ -43,7 +43,7 @@ if ( $is_ruby_on_rails == true) {
     # You have to understand the Ruby on Rails Asset pipeline to understand this.
     $request_uri = str_replace( "$uri_rel/assets", "/assets", $request_uri );
 }
-*/
+
 
 
 //$url = $backend_url . $request_uri;
@@ -190,6 +190,7 @@ foreach ( $headers_arr as $header ) {
 
 //$contents = preg_replace("#https?://#i","https://".$_SERVER['HTTP_HOST'].parse_url($_SERVER['REQUEST_URI'], PHP_PATH)."/darrylmcoder-proxy/$0",$contents);
 
-print encrypt($contents); //# return the proxied request result to the browser
+print $contents;
+//print encrypt($contents); //# return the proxied request result to the browser
 
 ?>
